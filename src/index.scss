@@ -1,0 +1,16 @@
+$colors: (
+        selected: #00B050
+);
+
+:root {
+    @each $name, $value in $colors {
+        --#{'' + $name}: #{$value};
+    }
+}
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 35px;
+    font-weight: 600;
+    margin: 0;
+}
