@@ -3,11 +3,11 @@ import styled from "styled-components";
 
 interface NumberProps {
     num: number
+    value: boolean
+    updateValue: (id: number) => void
 }
 
-export default function Number({num}: NumberProps) {
-
-    const [selected, setSelected] = useState(false)
+export default function Number(props: NumberProps) {
 
     const NumberText = styled.div`
       display: flex;
@@ -15,11 +15,11 @@ export default function Number({num}: NumberProps) {
       align-items: center;
       margin: 0;
       border: 1px solid black;
-      background-color: ${selected ? 'var(--selected)' : 'transparent'};
+      background-color: ${props.value ? 'var(--selected)' : 'transparent'};
       user-select: none;
     `
 
-    return <NumberText onClick={() => setSelected(!selected)}>
-        {num}
+    return <NumberText onClick={() => props.updateValue(props.num-1)}>
+        {props.num}
     </NumberText>
 }

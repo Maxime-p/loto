@@ -2,15 +2,12 @@ import React from "react";
 import styled from "styled-components";
 import Number from "./Number";
 
-export default function Grid() {
+interface GridProps{
+    data: boolean[]
+    updateData: (id: number) => void
+}
 
-    function generateNumbers(){
-        let result = []
-        for (let i = 1; i < 91; i++) {
-            result.push(i)
-        }
-        return result
-    }
+export default function Grid(props: GridProps) {
 
     const GridContainer = styled.div`
       width: 100vw;
@@ -21,10 +18,14 @@ export default function Grid() {
       gap: 0 0;
     `
 
+    function updateValue(id: number) {
+        props.updateData(id)
+    }
+
     return <GridContainer>
         {
-            generateNumbers().map((e) => {
-                return <Number key={e} num={e} />
+            props.data.map((value, key) => {
+                return <Number key={key} num={key+1} value={value} updateValue={updateValue} />
             })
         }
     </GridContainer>
