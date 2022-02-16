@@ -13,4 +13,7 @@ body {
     font-size: 35px;
     font-weight: 600;
     margin: 0;
+    padding-right: 17px;
+    overflow-x: hidden;
+    &::-webkit-scrollbar { width: 0 !important }
 }

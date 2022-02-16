@@ -15,10 +15,13 @@ function App() {
         if (localStorage.getItem('0')) {
             setLoading(true)
             let i = 0
+            let data = []
             while (localStorage.getItem(String(i))) {
-                setGrids([...grids, JSON.parse(localStorage.getItem(String(i))!)])
+                data.push(JSON.parse(localStorage.getItem(String(i))!))
                 i++
             }
+            setGrids(data)
+
             setLoading(false)
         } else {
             setGrids([newGrid()])
@@ -29,12 +32,6 @@ function App() {
         return <></>
     }
 
-    useEffect(() => {
-        grids.forEach((grid, key) => {
-            localStorage.setItem(String(key), JSON.stringify(grid))
-        })
-    }, [grids])
-
     function addGrid() {
         setGrids([...grids, newGrid()])
         setCurrentGrid(grids.length)
@@ -43,11 +40,28 @@ function App() {
     function gridUpdateData(id: number){
         let grid = grids[currentGrid]
         grid[id] = !grid[id]
+        localStorage.setItem(String(currentGrid), JSON.stringify(grid))
         setGrids([...grids])
     }
 
-    function clear() {
+    function updateLocalStorage() {
         localStorage.clear()
+        grids.forEach((value, index) => {
+            localStorage.setItem(String(index), JSON.stringify(value))
+        })
+    }
+
+    function clearCurrent() {
+        grids[currentGrid].forEach((_, index) => {
+            grids[currentGrid][index] = false
+        })
+        setGrids([...grids])
+        updateLocalStorage()
+    }
+
+    function clear() {
+        setGrids([newGrid()])
+        updateLocalStorage()
     }
 
     if (grids.length === 0){
@@ -57,6 +71,7 @@ function App() {
     return (
         <>
             <button onClick={addGrid}>Ajouter une grille</button>
+            <button onClick={clearCurrent}>Clear current</button>
             <button onClick={clear}>Clear</button>
             {
                 grids.map((grid, key) => {
