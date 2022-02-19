@@ -28,7 +28,7 @@ function App() {
         }
     }, [])
 
-    if (loading){
+    if (loading) {
         return <></>
     }
 
@@ -37,7 +37,7 @@ function App() {
         setCurrentGrid(grids.length)
     }
 
-    function gridUpdateData(id: number){
+    function gridUpdateData(id: number) {
         let grid = grids[currentGrid]
         grid[id] = !grid[id]
         localStorage.setItem(String(currentGrid), JSON.stringify(grid))
@@ -52,32 +52,42 @@ function App() {
     }
 
     function clearCurrent() {
-        grids[currentGrid].forEach((_, index) => {
-            grids[currentGrid][index] = false
-        })
-        setGrids([...grids])
-        updateLocalStorage()
+        if (window.confirm('Action dangereuse !')) {
+            grids[currentGrid].forEach((_, index) => {
+                grids[currentGrid][index] = false
+            })
+            setGrids([...grids])
+            updateLocalStorage()
+        }
     }
 
     function clear() {
-        setGrids([newGrid()])
-        updateLocalStorage()
+        if (window.confirm('Action dangereuse !')) {
+            setGrids([newGrid()])
+            updateLocalStorage()
+        }
     }
 
-    if (grids.length === 0){
+    if (grids.length === 0) {
         return <></>
     }
 
     return (
         <>
-            <button onClick={addGrid}>Ajouter une grille</button>
-            <button onClick={clearCurrent}>Clear current</button>
-            <button onClick={clear}>Clear</button>
-            {
-                grids.map((grid, key) => {
-                    return <button key={key} onClick={() => setCurrentGrid(key)}>{key+1}</button>
-                })
-            }
+            <div className="commands">
+                <div>
+                    <button onClick={addGrid}>Ajouter une grille</button>
+                    {
+                        grids.map((grid, key) => {
+                            return <button key={key} onClick={() => setCurrentGrid(key)}>{key + 1}</button>
+                        })
+                    }
+                </div>
+                <div>
+                    <button onClick={clearCurrent}>Clear current</button>
+                    <button onClick={clear}>Clear</button>
+                </div>
+            </div>
             <Grid data={grids[currentGrid]} updateData={gridUpdateData}/>
         </>
     )

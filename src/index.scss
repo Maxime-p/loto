@@ -1,5 +1,5 @@
 $colors: (
-        selected: #00B050
+        selected: #02885C
 );
 
 :root {
@@ -13,7 +13,27 @@ body {
     font-size: 35px;
     font-weight: 600;
     margin: 0;
-    padding-right: 17px;
     overflow-x: hidden;
-    &::-webkit-scrollbar { width: 0 !important }
+
+    &::-webkit-scrollbar {
+        width: 0 !important
+    }
+}
+
+.commands {
+    display: flex;
+    justify-content: space-between;
+    align-items: stretch;
+    margin: 5px 3px;
+
+    div {
+        display: flex;
+        justify-content: start;
+        align-items: stretch;
+        gap: 2px;
+
+        button {
+            padding: 8px 12px;
+        }
+    }
 }

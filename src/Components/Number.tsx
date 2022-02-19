@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React from "react";
 import styled from "styled-components";
 
 interface NumberProps {
@@ -15,6 +15,7 @@ export default function Number(props: NumberProps) {
       align-items: center;
       margin: 0;
       border: 1px solid black;
+      color: ${props.value ? '#fff' : 'inherit'};
       background-color: ${props.value ? 'var(--selected)' : 'transparent'};
       user-select: none;
     `
