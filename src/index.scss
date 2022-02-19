@@ -1,11 +1,5 @@
-$colors: (
-        selected: #02885C
-);
-
 :root {
-    @each $name, $value in $colors {
-        --#{'' + $name}: #{$value};
-    }
+    --selected: #02885C;
 }
 
 body {
@@ -36,4 +30,14 @@ body {
             padding: 8px 12px;
         }
     }
+}
+
+.hidden {
+    display: none;
+}
+
+.color-modal {
+    position: absolute;
+    top: 30px;
+    right: 30px;
 }

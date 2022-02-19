@@ -1,11 +1,14 @@
 import React, {useEffect, useState} from 'react'
 import Grid from "./Components/Grid";
+import {ChromePicker} from "react-color";
 
 function App() {
 
     const [loading, setLoading] = useState<boolean>(false)
     const [grids, setGrids] = useState<boolean[][]>([])
     const [currentGrid, setCurrentGrid] = useState<number>(0)
+    const [colorModal, setColorModal] = useState<boolean>(false)
+    const [bgColor, setBGColor] = useState<string>("#02885C")
 
     const newGrid = () => {
         return new Array(90).fill(false)
@@ -68,6 +71,14 @@ function App() {
         }
     }
 
+    function handleColorChange(color: any) {
+        setBGColor(color.hex)
+    }
+
+    useEffect(() => {
+        document.documentElement.style.setProperty('--selected', bgColor)
+    }, [bgColor])
+
     if (grids.length === 0) {
         return <></>
     }
@@ -84,10 +95,16 @@ function App() {
                     }
                 </div>
                 <div>
-                    <button onClick={clearCurrent}>Clear current</button>
-                    <button onClick={clear}>Clear</button>
+                    <button onClick={() => setColorModal(!colorModal)}/>
+                    <button onClick={clearCurrent}>Suppression active</button>
+                    <button onClick={clear}>Suppression</button>
                 </div>
             </div>
+            <ChromePicker
+                className={colorModal ? 'color-modal' : 'hidden'}
+                color={bgColor}
+                onChangeComplete={handleColorChange}
+            />
             <Grid data={grids[currentGrid]} updateData={gridUpdateData}/>
         </>
     )
