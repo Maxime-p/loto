@@ -1,0 +1,19 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+	--selected: #02885c;
+}
+
+body {
+	font-family: "Montserrat", sans-serif;
+	font-size: 50px;
+	font-weight: 600;
+	margin: 0;
+	overflow-x: hidden;
+}
+
+body::-webkit-scrollbar {
+	width: 0 !important;
+}
