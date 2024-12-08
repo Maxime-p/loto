@@ -11,6 +11,7 @@ export const Case = (props: IProps) => {
 
 	const grids = useAppSelector((state) => state.grids.value)
 	const currentGrid = useAppSelector((state) => state.settings.currentGrid)
+	const fontSize = useAppSelector((state) => state.settings.baseFontSize)
 
 	const last = grids[currentGrid][grids[currentGrid].length - 1]
 
@@ -24,7 +25,8 @@ export const Case = (props: IProps) => {
 	return (
 		<div
 			onClick={handleClick}
-			className={`${styles} ${props.value ? "text-white bg-[var(--selected)]" : "text-inherit bg-transparent"} ${props.num === last ? "text-6xl animate-pulse" : ""}`}
+			className={`${styles} ${props.value ? "text-white bg-[var(--selected)]" : "text-inherit bg-transparent"} ${props.num === last ? "animate-pulse" : ""}`}
+			style={{fontSize:   props.num === last ? fontSize *1.4 : fontSize}}
 		>
 			{props.num}
 		</div>

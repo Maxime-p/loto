@@ -3,6 +3,7 @@ import { useEffect, useState} from "react"
 import { addGrid, clearGrid, resetGrids } from "@Stores/gridSlice"
 import { useAppDispatch, useAppSelector } from "@Stores/hooks"
 import {
+	setBaseFontSize,
 	setCurrentColor,
 	setCurrentGrid,
 } from "@Stores/settingSlice"
@@ -18,17 +19,11 @@ export const Control = () => {
 	const [isPopperVisible, setIsPopperVisible] = useState(false)
 	const { styles, attributes } = usePopper(referenceElement, popperElement);
 
-	const [fontSize, setFontSize] = useState(50)
-
-	useEffect(() => {
-		document.body.style.fontSize = `${fontSize}px`
-	}, [fontSize])
-
-
 	const grids = useAppSelector((state) => state.grids.value)
 
 	const currentGrid = useAppSelector((state) => state.settings.currentGrid)
 	const currentColor = useAppSelector((state) => state.settings.currentColor)
+	const fontSize = useAppSelector((state) => state.settings.baseFontSize)
 
 	const handleColorChange = (color: string) => {
 		dispatch(setCurrentColor(color))
@@ -41,7 +36,7 @@ export const Control = () => {
 	return (
 		<>
 			<div className="flex justify-between items-stretch m-1.5">
-				<div className="flex justify-start items-stretch gap-0.5">
+				<div className="flex justify-start items-stretch gap-1">
 					<Button
 						className="p-2"
 						onClick={() => {
@@ -63,15 +58,17 @@ export const Control = () => {
 						)
 					})}
 				</div>
-				<div className="flex justify-start items-stretch gap-0.5">
-					<input
+				<div className="flex justify-start items-stretch gap-1">
+					<div className="flex flex-col justify-center"><input
 						type="range"
 						min="10"
 						max="100"
 						value={fontSize}
-						onChange={(e) => setFontSize(Number(e.target.value))}
-						className="p-2"
-					/>
+						onChange={(e) => {
+							dispatch(setBaseFontSize(Number(e.target.value)))
+						}}
+						className="p-2 h-4"
+					/></div>
 					<Button
 						className="p-2"
 						onClick={() => setIsPopperVisible(!isPopperVisible)}
