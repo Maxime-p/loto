@@ -20,7 +20,7 @@ export const Case = (props: IProps) => {
 	}
 
 	const styles =
-		"flex justify-center items-center m-0 border border-black  select-none opacity-100 transition-opacity duration-500"
+		"flex justify-center items-center m-0 border border-black  select-none opacity-100 duration-500"
 
 	return (
 		<div
