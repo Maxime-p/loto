@@ -20,12 +20,12 @@ export const Case = (props: IProps) => {
 	}
 
 	const styles =
-		"flex justify-center items-center m-0 border border-black  select-none opacity-100 duration-500"
+		"flex justify-center items-center m-0 border border-black  select-none opacity-100"
 
 	return (
 		<div
 			onClick={handleClick}
-			className={`${styles} ${props.value ? "text-white bg-[var(--selected)]" : "text-inherit bg-transparent"} ${props.num === last ? "animate-pulse" : ""}`}
+			className={`${styles} ${props.value ? "text-white bg-[var(--selected)]" : "text-inherit bg-transparent"} ${props.num === last ? "animate-pulse duration-500" : ""}`}
 			style={{fontSize:   props.num === last ? fontSize *1.4 : fontSize}}
 		>
 			{props.num}
